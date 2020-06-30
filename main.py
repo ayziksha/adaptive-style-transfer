@@ -33,16 +33,16 @@ parser = argparse.ArgumentParser(description='')
 # ========================== GENERAL PARAMETERS ========================= #
 parser.add_argument('--model_name',
                     dest='model_name',
-                    default='model1',
+                    default='model_picasso',#'model1',
                     help='Name of the model')
 parser.add_argument('--phase',
                     dest='phase',
-                    default='train',
+                    default='train',#'inference',#
                     help='Specify current phase: train or inference.')
 parser.add_argument('--image_size',
                     dest='image_size',
                     type=int,
-                    default=256*3,
+                    default=256*3,#1280,#
                     help='For training phase: will crop out images of this particular size.'
                          'For inference phase: each input image will have the smallest side of this size. '
                          'For inference recommended size is 1280.')
@@ -53,12 +53,12 @@ parser.add_argument('--ptad',
                     dest='path_to_art_dataset',
                     type=str,
                     #default='./data/vincent-van-gogh_paintings/',
-                    default='./data/vincent-van-gogh_road-with-cypresses-1890',
+                    default='/root/sharedfolder2/style/modigliani_dataset/',#'./data/paul-gauguin',#./data/vincent-van-gogh_road-with-cypresses-1890',
                     help='Directory with paintings representing style we want to learn.')
 parser.add_argument('--ptcd',
                     dest='path_to_content_dataset',
                     type=str,
-                    default=None,
+                    default='/root/sharedfolder2/train_large_places365standard/data_large/',
                     help='Path to Places365 training dataset.')
 
 
@@ -103,12 +103,12 @@ parser.add_argument('--dlw',
 parser.add_argument('--tlw',
                     dest='transformer_loss_weight',
                     type=float,
-                    default=100.,
+                    default=150.,#100.,
                     help='Weight of transformer loss.')
 parser.add_argument('--flw',
                     dest='feature_loss_weight',
                     type=float,
-                    default=100.,
+                    default=150.,#100.,
                     help='Weight of feature loss.')
 parser.add_argument('--dsr',
                     dest='discr_success_rate',
@@ -121,7 +121,7 @@ parser.add_argument('--dsr',
 parser.add_argument('--ii_dir',
                     dest='inference_images_dir',
                     type=parse_list,
-                    default=['./data/sample_photographs/'],
+                    default=['/root/sharedfolder2/baseline/'],#['./data/sample_photographs/'],
                     help='Directory with images we want to process.')
 parser.add_argument('--save_dir',
                     type=str,
@@ -149,7 +149,7 @@ def main(_):
             model.train(args, ckpt_nmbr=args.ckpt_nmbr)
         if args.phase == 'inference' or args.phase == 'test':
             print("Inference.")
-            model.inference(args, args.inference_images_dir, resize_to_original=False,
+            model.inference(args, args.inference_images_dir, resize_to_original=True,
                             to_save_dir=args.save_dir,
                             ckpt_nmbr=args.ckpt_nmbr)
 
