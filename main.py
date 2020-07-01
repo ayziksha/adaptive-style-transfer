@@ -33,7 +33,7 @@ parser = argparse.ArgumentParser(description='')
 # ========================== GENERAL PARAMETERS ========================= #
 parser.add_argument('--model_name',
                     dest='model_name',
-                    default='model_picasso',#'model1',
+                    default='model_tlw150_flw150',#'model1',
                     help='Name of the model')
 parser.add_argument('--phase',
                     dest='phase',
