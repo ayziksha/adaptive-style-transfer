@@ -368,7 +368,7 @@ class Artgan(object):
                            filepath='%s/step_%d.jpg' % (self.sample_dir, step))
         print("Training is finished. Terminate jobs.")
         for p in jobs:
-            # p.join()
+            p.join()
             p.terminate()
 
         print("Done.")
